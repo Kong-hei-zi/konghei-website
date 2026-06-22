@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Konghei - 个人空间</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="logo">Konghei</div>
+    <ul class="nav-links">
+      <li><button class="nav-btn active" data-target="home">🏠 首页</button></li>
+      <li><button class="nav-btn" data-target="blog">📝 博客</button></li>
+      <li><button class="nav-btn" data-target="portfolio">🎨 作品集</button></li>
+      <li><button class="nav-btn" data-target="shop">🛒 小店</button></li>
+      <li><button class="nav-btn" data-target="notes">📚 学习笔记</button></li>
+    </ul>
+    <div class="sidebar-footer">
+      <p>2026 Konghei</p>
+    </div>
+  </nav>
+
+  <main class="content">
+    <section id="home" class="page active">
+      <div class="hero">
+        <h1>你好，我是 <span class="highlight">Konghei</span></h1>
+        <p class="subtitle">一个热爱创造、喜欢折腾的个人空间</p>
+        <p class="intro">这里记录着我的思考、作品、分享和成长。随便逛逛吧～</p>
+        <div class="hero-links">
+          <a href="https://github.com" target="_blank" class="btn">GitHub</a>
+          <a href="mailto:konghei@example.com" class="btn btn-outline">联系我</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog" class="page">
+      <h2>📝 博客</h2>
+      <p class="section-desc">记录思考，分享知识</p>
+      <div class="card-list">
+        <article class="card">
+          <span class="card-date">2026-06-20</span>
+          <h3>如何从零搭建一个个人网站</h3>
+          <p>从域名选择到代码部署，完整记录我的建站过程与踩坑经验。</p>
+          <span class="card-tag">Web开发</span>
+        </article>
+        <article class="card">
+          <span class="card-date">2026-06-15</span>
+          <h3>为什么我开始学编程</h3>
+          <p>从考研复习到敲下第一行代码，这段旅程的起点与动力。</p>
+          <span class="card-tag">随笔</span>
+        </article>
+        <article class="card">
+          <span class="card-date">2026-06-10</span>
+          <h3>Git 入门：版本控制其实很简单</h3>
+          <p>用生活中的例子理解 Git 的核心概念：commit、branch、merge。</p>
+          <span class="card-tag">教程</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="portfolio" class="page">
+      <h2>🎨 作品集</h2>
+      <p class="section-desc">我做过的项目和作品</p>
+      <div class="card-list grid-2">
+        <div class="card">
+          <div class="card-icon">🐱</div>
+          <h3>萌宠照片墙</h3>
+          <p>一个展示猫咪日常的静态网页，支持图片懒加载与瀑布流布局。</p>
+          <span class="card-tag">HTML/CSS</span>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>考研词汇助手</h3>
+          <p>基于艾宾浩斯遗忘曲线的背单词工具，支持导入自定义词库。</p>
+          <span class="card-tag">Python</span>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>微信自动回复机器人</h3>
+          <p>基于 wxauto + DeepSeek API 的智能聊天助手，零封号风险。</p>
+          <span class="card-tag">Python</span>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>个人网站</h3>
+          <p>就是你正在浏览的这个网站！纯 HTML/CSS/JS 打造。</p>
+          <span class="card-tag">Web开发</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="shop" class="page">
+      <h2>🛒 小店</h2>
+      <p class="section-desc">用心做的好东西</p>
+      <div class="card-list grid-3">
+        <div class="card shop-card">
+          <div class="shop-img">📸</div>
+          <h3>定制头像绘制</h3>
+          <p>手绘风格头像，赛璐璐/厚涂均可</p>
+          <span class="price">¥ 50 起</span>
+        </div>
+        <div class="card shop-card">
+          <div class="shop-img">📝</div>
+          <h3>简历润色服务</h3>
+          <p>针对性优化，提升面试邀约率</p>
+          <span class="price">¥ 30 起</span>
+        </div>
+        <div class="card shop-card">
+          <div class="shop-img">💻</div>
+          <h3>简单网页制作</h3>
+          <p>个人主页/作品集/Landing Page</p>
+          <span class="price">¥ 100 起</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="notes" class="page">
+      <h2>📚 学习笔记</h2>
+      <p class="section-desc">整理知识，持续成长</p>
+      <div class="notes-grid">
+        <div class="notes-category">
+          <h3>编程</h3>
+          <ul>
+            <li>HTML/CSS 基础入门</li>
+            <li>JavaScript DOM 操作</li>
+            <li>Python 自动化脚本</li>
+            <li>Git 版本控制</li>
+          </ul>
+        </div>
+        <div class="notes-category">
+          <h3>考研</h3>
+          <ul>
+            <li>英语长难句精析</li>
+            <li>数学公式速查</li>
+            <li>政治时间线梳理</li>
+            <li>专业课知识图谱</li>
+          </ul>
+        </div>
+        <div class="notes-category">
+          <h3>金融</h3>
+          <ul>
+            <li>FRM 风险管理笔记</li>
+            <li>Basel III 市场风险</li>
+            <li>投资组合理论</li>
+            <li>期权定价模型</li>
+          </ul>
+        </div>
+        <div class="notes-category">
+          <h3>工具</h3>
+          <ul>
+            <li>Obsidian 使用技巧</li>
+            <li>Claude Code 命令大全</li>
+            <li>命令行常用操作</li>
+            <li>飞书多维表格公式</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
