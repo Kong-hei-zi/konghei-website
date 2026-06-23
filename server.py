@@ -65,6 +65,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         projects = data.get('projects', [])
         images = data.get('images', {})
         os.makedirs(PROJECTS_DIR, exist_ok=True)
+        # 读取旧的 index.json，保留已有的图片路径
+        old_index = {}
+        old_path = os.path.join(PROJECTS_DIR, 'index.json')
+        if os.path.exists(old_path):
+            try:
+                with open(old_path, 'r', encoding='utf-8') as f:
+                    for item in json.load(f):
+                        old_index[item['id']] = item
+            except Exception:
+                pass
         saved_images = {}
         for pid, img_data in images.items():
             proj_dir = os.path.join(PROJECTS_DIR, pid)
@@ -88,14 +98,37 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             saved_images[pid] = saved
         index = []
         for p in projects:
+            pid = p.get('id', '')
+            old = old_index.get(pid, {})
+            img_path = old.get('image', '')
+            shot_paths = old.get('screenshots', [])
+            # 新图片覆盖旧路径
+            if pid in saved_images:
+                saved = saved_images[pid]
+                if 'thumb.png' in saved:
+                    img_path = 'projects/' + pid + '/thumb.png'
+                new_shots = ['projects/' + pid + '/' + f for f in saved if f.startswith('shot-')]
+                if new_shots:
+                    shot_paths = new_shots
+            # 检查磁盘上是否已有图片文件（兜底）
+            if not img_path:
+                thumb_file = os.path.join(PROJECTS_DIR, pid, 'thumb.png')
+                if os.path.exists(thumb_file):
+                    img_path = 'projects/' + pid + '/thumb.png'
+            if not shot_paths:
+                proj_dir = os.path.join(PROJECTS_DIR, pid)
+                if os.path.isdir(proj_dir):
+                    existing = sorted([f for f in os.listdir(proj_dir) if f.startswith('shot-')])
+                    if existing:
+                        shot_paths = ['projects/' + pid + '/' + f for f in existing]
             index.append({
-                'id': p.get('id', ''),
+                'id': pid,
                 'icon': p.get('icon', ''),
                 'title': p.get('title', ''),
                 'summary': p.get('summary', ''),
                 'tag': p.get('tag', ''),
-                'image': p.get('image', ''),
-                'screenshots': p.get('screenshots', []),
+                'image': img_path,
+                'screenshots': shot_paths,
                 'demo': p.get('demo', ''),
                 'github': p.get('github', ''),
                 'body': p.get('body', '')

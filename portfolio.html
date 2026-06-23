@@ -279,9 +279,10 @@
 
     async function lp() {
       try { var r = await fetch('/projects/index.json'); all = await r.json(); } catch(e) { all = []; }
-      var sids = {}; all.forEach(function(p) { sids[p.id] = true; });
-      var local = glp().filter(function(p) { return !sids[p.id]; });
-      all = local.concat(all);
+      /* 本地编辑优先覆盖服务器数据 */
+      var merged = {}; all.forEach(function(p) { merged[p.id] = p; });
+      glp().forEach(function(p) { merged[p.id] = p; });
+      all = Object.values(merged);
     }
 
     function glp() { try { return JSON.parse(localStorage.getItem(UK)) || []; } catch(e) { return []; } }

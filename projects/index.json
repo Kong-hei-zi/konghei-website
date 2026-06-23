@@ -5,8 +5,11 @@
     "title": "贪吃蛇",
     "summary": "贪吃蛇",
     "tag": "HTML/CSS",
-    "image": "",
-    "screenshots": [],
+    "image": "projects/proj-1782213734036/thumb.png",
+    "screenshots": [
+      "projects/proj-1782213734036/shot-1.png",
+      "projects/proj-1782213734036/shot-2.png"
+    ],
     "demo": "",
     "github": "https://github.com/Kong-hei-zi/small-game/issues",
     "body": "简单的贪吃蛇"
