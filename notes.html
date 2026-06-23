@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学习笔记 - Konghei</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="tb-logo" href="index.html">Konghei</a>
+    <nav class="tb-nav">
+      <a class="tb-btn" href="index.html"><span class="tb-en">INDEX</span><span class="tb-cn">首页</span></a>
+      <a class="tb-btn" href="blog.html"><span class="tb-en">BLOG</span><span class="tb-cn">博客</span></a>
+      <a class="tb-btn" href="portfolio.html"><span class="tb-en">WORKS</span><span class="tb-cn">作品集</span></a>
+      <a class="tb-btn" href="shop.html"><span class="tb-en">SHOP</span><span class="tb-cn">小店</span></a>
+      <a class="tb-btn active" href="notes.html"><span class="tb-en">NOTES</span><span class="tb-cn">学习笔记</span></a>
+    </nav>
+    <div class="tb-extra"><span class="tb-doll">🧸</span></div>
+  </header>
+
+  <main class="sub-page">
+    <div class="screen-header">
+      <div class="screen-tag">KNOWLEDGE_BASE // 知识库</div>
+      <h2 class="screen-title"><span class="st-en">NOTES</span><span class="st-cn">学习笔记</span></h2>
+      <p class="screen-desc">整理知识，持续成长</p>
+    </div>
+    <div id="content-root"></div>
+  </main>
+
+  <script src="content.js"></script>
+  <script>
+    (function(){var c=document.getElementById('content-root');if(!c||!SITE||!SITE.notes)return;function h(t,a,k){var e=document.createElement(t);if(a)Object.keys(a).forEach(function(p){if(p==='className')e.className=a[p];else if(p==='innerHTML')e.innerHTML=a[p];else e.setAttribute(p,a[p])});if(k){if(typeof k==='string')e.textContent=k;else if(Array.isArray(k))k.forEach(function(x){if(x)e.appendChild(x)});else e.appendChild(k)}return e}
+    var g=h('div',{className:'kb-grid'});SITE.notes.forEach(function(f){g.appendChild(h('div',{className:'kb-folder'},[h('div',{className:'kb-folder-header'},[h('span',{className:'kb-icon'},'📁'),h('h3',null,f.title),h('span',{className:'kb-count'},f.items.length+' 篇')]),h('ul',{className:'kb-list'},f.items.map(function(li){return h('li',null,li)}))]))});c.appendChild(g);
+    setTimeout(function(){document.querySelectorAll('.kb-folder').forEach(function(el,i){el.style.setProperty('--anim-delay',(i*0.08)+'s');el.classList.add('anim-in')})},200);})();
+  </script>
+</body>
+</html>

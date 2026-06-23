@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>作品集 - Konghei</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="tb-logo" href="index.html">Konghei</a>
+    <nav class="tb-nav">
+      <a class="tb-btn" href="index.html"><span class="tb-en">INDEX</span><span class="tb-cn">首页</span></a>
+      <a class="tb-btn" href="blog.html"><span class="tb-en">BLOG</span><span class="tb-cn">博客</span></a>
+      <a class="tb-btn active" href="portfolio.html"><span class="tb-en">WORKS</span><span class="tb-cn">作品集</span></a>
+      <a class="tb-btn" href="shop.html"><span class="tb-en">SHOP</span><span class="tb-cn">小店</span></a>
+      <a class="tb-btn" href="notes.html"><span class="tb-en">NOTES</span><span class="tb-cn">学习笔记</span></a>
+    </nav>
+    <div class="tb-extra"><span class="tb-doll">🧸</span></div>
+  </header>
+
+  <main class="sub-page">
+    <div class="screen-header">
+      <div class="screen-tag">SHOWCASE // 展示柜</div>
+      <h2 class="screen-title"><span class="st-en">WORKS</span><span class="st-cn">作品集</span></h2>
+      <p class="screen-desc">我做过的项目和作品</p>
+    </div>
+    <div id="content-root"></div>
+  </main>
+
+  <script src="content.js"></script>
+  <script>
+    (function() {
+      var c=document.getElementById('content-root');
+      if(!c||!SITE||!SITE.portfolio)return;
+      function h(t,a,k){var e=document.createElement(t);if(a)Object.keys(a).forEach(function(p){if(p==='className')e.className=a[p];else if(p==='innerHTML')e.innerHTML=a[p];else if(p==='dataset')Object.assign(e.dataset,a[p]);else e.setAttribute(p,a[p])});if(k){if(typeof k==='string')e.textContent=k;else if(Array.isArray(k))k.forEach(function(x){if(x)e.appendChild(x)});else e.appendChild(k)}return e}
+
+      var lv=h('div',{className:'list-view'});
+      var grid=h('div',{className:'showcase-grid'});
+      SITE.portfolio.forEach(function(p){grid.appendChild(h('div',{className:'showcase-card card card-clickable',dataset:{detail:p.id+'-d'}},[h('div',{className:'showcase-preview'},p.icon),h('div',{className:'showcase-info'},[h('h3',null,p.title),h('p',null,p.summary),h('span',{className:'card-tag'},p.tag)])]))});
+      lv.appendChild(grid);c.appendChild(lv);
+
+      SITE.portfolio.forEach(function(p){c.appendChild(h('div',{id:p.id+'-d',className:'detail-view'},[h('button',{className:'btn-back'},'← 返回列表'),h('div',{className:'detail-article'},[h('div',{className:'showcase-preview',style:'font-size:4rem;text-align:center;margin-bottom:16px;'},p.icon),h('h1',null,p.title),h('span',{className:'card-tag'},p.tag),h('div',{className:'detail-body',innerHTML:p.body})])]))});
+
+      document.querySelectorAll('[data-detail]').forEach(function(card){card.addEventListener('click',function(){var d=document.getElementById(card.dataset.detail);if(d){lv.classList.add('hidden');d.classList.add('active')}})});
+      document.querySelectorAll('.btn-back').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();document.querySelectorAll('.detail-view').forEach(function(d){d.classList.remove('active')});lv.classList.remove('hidden')})});
+
+      setTimeout(function(){document.querySelectorAll('.showcase-card').forEach(function(el,i){el.style.setProperty('--anim-delay',(i*0.08)+'s');el.classList.add('anim-in')})},200);
+    })();
+  </script>
+</body>
+</html>
