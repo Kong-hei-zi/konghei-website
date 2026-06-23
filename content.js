@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════
    Konghei 个人网站 · 内容数据中心
-   加内容只改这个文件！
+   博客文章已迁移至 /posts/ 目录，每篇一个 .md 文件
    ══════════════════════════════════════ */
 
 var SITE = {
@@ -11,25 +11,6 @@ var SITE = {
     subtitle: 'PERSONAL SPACE',
     desc: '透过这扇窗，看看我的世界。外面是霓虹闪烁的城市，房间里是我正在搭建的一切。'
   },
-
-  blog: [
-    {
-      id: "user-1782190660938",
-      date: "2026-06-23",
-      title: "test",
-      summary: "这是一条测试笔记",
-      tag: "随笔",
-      body: "这是一条测试笔记"
-    },
-    {
-      id: "seed-0",
-      date: "2026-06-20",
-      title: "如何从零搭建一个个人网站",
-      summary: "从域名选择到代码部署，完整记录我的建站过程与踩坑经验。",
-      tag: "Web开发",
-      body: "<h2>为什么要建站</h2><p>互联网时代，拥有一个属于自己的网站就像在数字世界里拥有一个家。</p><h2>三步走</h2><ol><li><strong>写代码</strong>：HTML + CSS + JavaScript，三个文件就能搭出一个完整网站</li><li><strong>部署</strong>：推送到 GitHub Pages，免费、稳定、自动部署</li><li><strong>绑定域名</strong>：买一个喜欢的域名，DNS 指向 GitHub Pages 即可</li></ol><h2>心得</h2><p>先动手，再完美。</p>"
-    }
-  ],
 
   portfolio: [
     {
