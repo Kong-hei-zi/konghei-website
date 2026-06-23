@@ -850,6 +850,7 @@ body {
 
 .bs-room {
   position: relative; min-height: 100vh; overflow: hidden;
+  padding-top: calc(var(--topbar-h) + 48px);
   background: radial-gradient(ellipse at 50% 30%, rgba(167,139,250,0.06) 0%, transparent 60%),
               radial-gradient(ellipse at 20% 80%, rgba(251,191,36,0.04) 0%, transparent 50%),
               var(--bg);
