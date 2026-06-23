@@ -221,6 +221,14 @@
 
       var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
       var isAuthed = isLocal && !!sessionStorage.getItem(AUTH_KEY);
+
+      /* 线上：彻底隐藏锁、+号、密码框 */
+      if (!isLocal) {
+        document.getElementById('unlock-btn').style.display = 'none';
+        document.getElementById('fab-add').style.display = 'none';
+        document.getElementById('fab-export').style.display = 'none';
+        document.getElementById('pw-dialog').style.display = 'none';
+      }
       var fab = document.getElementById('fab-add');
       var fabExport = document.getElementById('fab-export');
       var unlockBtn = document.getElementById('unlock-btn');
