@@ -198,9 +198,15 @@
       function h(t,a,k){var e=document.createElement(t);if(a)Object.keys(a).forEach(function(p){if(p==='className')e.className=a[p];else if(p==='innerHTML')e.innerHTML=a[p];else if(p==='dataset')Object.assign(e.dataset,a[p]);else e.setAttribute(p,a[p])});if(k){if(typeof k==='string')e.textContent=k;else if(Array.isArray(k))k.forEach(function(x){if(x)e.appendChild(x)});else e.appendChild(k)}return e}
 
       function getUserPosts() {
+        /* 线上：直接读 content.js，不用 localStorage */
+        if (!isLocal) {
+          return SITE.blog.map(function(p, i) {
+            return { id: p.id || ('seed-'+i), date: p.date, title: p.title, summary: p.summary, tag: p.tag, body: p.body };
+          });
+        }
+        /* 本地：读 localStorage，首次自动导入 */
         var posts = [];
         try { posts = JSON.parse(localStorage.getItem(USER_KEY)) || []; } catch(e) {}
-        /* 检查 content.js 的种子文章是否已导入，没有就补上 */
         var hasSeeds = posts.some(function(p) { return p.id && p.id.startsWith('seed-'); });
         if (!hasSeeds && SITE.blog.length) {
           var seeds = SITE.blog.map(function(p, i) {
