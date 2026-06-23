@@ -20,20 +20,81 @@
     <div class="tb-extra"><span class="tb-doll">🧸</span></div>
   </header>
 
-  <main class="sub-page">
-    <div class="screen-header">
-      <div class="screen-tag">KNOWLEDGE_BASE // 知识库</div>
+  <main class="bs-room" id="bs-room">
+    <div class="bs-atmo"></div>
+    <div class="notes-hero">
+      <div class="screen-tag">CYBER_LIBRARY // 赛博书库</div>
       <h2 class="screen-title"><span class="st-en">NOTES</span><span class="st-cn">学习笔记</span></h2>
-      <p class="screen-desc">整理知识，持续成长</p>
+      <div class="bs-toolbar">
+        <div class="notes-search-bar">
+          <span class="notes-search-icon">🔍</span>
+          <input type="text" id="notes-search" placeholder="搜索书架...">
+          <span class="notes-search-clear" id="search-clear">✕</span>
+        </div>
+        <div class="bs-cats" id="bs-cats"></div>
+        <button class="bs-btn-add" id="bs-btn-add" style="display:none">+ 新笔记</button>
+      </div>
     </div>
-    <div id="content-root"></div>
+    <div class="bs-shelves" id="bs-shelves"></div>
+    <div class="notes-empty" id="notes-empty" style="display:none">
+      <span>📚</span><p>书架上还没有笔记</p>
+    </div>
   </main>
 
-  <script src="content.js"></script>
-  <script>
-    (function(){var c=document.getElementById('content-root');if(!c||!SITE||!SITE.notes)return;function h(t,a,k){var e=document.createElement(t);if(a)Object.keys(a).forEach(function(p){if(p==='className')e.className=a[p];else if(p==='innerHTML')e.innerHTML=a[p];else e.setAttribute(p,a[p])});if(k){if(typeof k==='string')e.textContent=k;else if(Array.isArray(k))k.forEach(function(x){if(x)e.appendChild(x)});else e.appendChild(k)}return e}
-    var g=h('div',{className:'kb-grid'});SITE.notes.forEach(function(f){g.appendChild(h('div',{className:'kb-folder'},[h('div',{className:'kb-folder-header'},[h('span',{className:'kb-icon'},'📁'),h('h3',null,f.title),h('span',{className:'kb-count'},f.items.length+' 篇')]),h('ul',{className:'kb-list'},f.items.map(function(li){return h('li',null,li)}))]))});c.appendChild(g);
-    setTimeout(function(){document.querySelectorAll('.kb-folder').forEach(function(el,i){el.style.setProperty('--anim-delay',(i*0.08)+'s');el.classList.add('anim-in')})},200);})();
-  </script>
+  <div class="note-overlay" id="note-overlay">
+    <div class="note-panel">
+      <div class="note-panel-bar">
+        <span class="note-panel-folder" id="note-panel-folder"></span>
+        <button class="note-panel-close" id="note-panel-close">✕</button>
+      </div>
+      <div class="note-panel-body" id="note-panel-body"></div>
+    </div>
+  </div>
+
+  <div class="bs-editor-overlay" id="bs-editor-overlay">
+    <div class="bs-editor">
+      <div class="bs-editor-bar">
+        <h3>📝 编辑笔记</h3>
+        <button class="bs-editor-close" id="bs-editor-close">✕</button>
+      </div>
+      <div class="bs-editor-body">
+        <div class="bs-editor-field"><label>标题</label><input type="text" id="ed-title" placeholder="笔记标题"></div>
+        <div class="bs-editor-row">
+          <div class="bs-editor-field"><label>分类</label><select id="ed-cat"><option value="编程">💻 编程</option><option value="金融">📊 金融</option><option value="工具">🔧 工具</option><option value="其他">📌 其他</option></select></div>
+          <div class="bs-editor-field"><label>日期</label><input type="text" id="ed-date" placeholder="2026-06"></div>
+        </div>
+        <div class="bs-editor-field"><label>标签（逗号分隔）</label><input type="text" id="ed-tags" placeholder="前端, 入门"></div>
+        <div class="bs-editor-field"><label>摘要</label><input type="text" id="ed-summary" placeholder="一句话概述"></div>
+        <div class="bs-editor-field">
+          <label>内容（Markdown）</label>
+          <div class="bs-editor-upload">
+            <input type="file" id="ed-file" accept=".md" style="display:none">
+            <button class="bs-btn-upload" id="bs-btn-upload">📁 上传 .md 文件</button>
+            <span class="bs-upload-hint" id="bs-upload-hint"></span>
+          </div>
+          <textarea id="ed-body" rows="12" placeholder="在此编写 Markdown 内容...或上传 .md 文件自动填入"></textarea>
+        </div>
+      </div>
+      <div class="bs-editor-foot">
+        <span id="ed-status"></span>
+        <div>
+          <button class="bs-btn-save" id="bs-btn-save">💾 保存草稿</button>
+          <button class="bs-btn-pub" id="bs-btn-pub">⬆ 发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bs-auth-overlay" id="bs-auth-overlay">
+    <div class="bs-auth-box">
+      <h3>🔐 验证身份</h3>
+      <input type="password" id="bs-auth-pwd" placeholder="输入密码">
+      <button id="bs-auth-go">确认</button>
+      <p class="bs-auth-err" id="bs-auth-err"></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="notes-app.js"></script>
 </body>
 </html>

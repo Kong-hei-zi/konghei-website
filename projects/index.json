@@ -15,18 +15,6 @@
     "body": "简单的贪吃蛇"
   },
   {
-    "id": "proj-1",
-    "icon": "🐱",
-    "title": "萌宠照片墙",
-    "summary": "猫咪日常展示网页，图片懒加载 + 瀑布流。",
-    "tag": "HTML/CSS",
-    "image": "",
-    "screenshots": [],
-    "demo": "",
-    "github": "",
-    "body": "<h2>项目简介</h2><p>纯 HTML/CSS 实现，图片懒加载与瀑布流布局。</p><h2>技术要点</h2><ul><li>CSS Grid 瀑布流</li><li>Intersection Observer 懒加载</li><li>响应式适配</li></ul>"
-  },
-  {
     "id": "proj-2",
     "icon": "📖",
     "title": "考研词汇助手",

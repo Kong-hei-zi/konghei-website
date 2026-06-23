@@ -1,0 +1,82 @@
+[
+  {
+    "id": "note-html-css",
+    "date": "2026-05",
+    "title": "HTML/CSS 基础入门",
+    "summary": "从零搭建网页结构，掌握常用标签与样式布局",
+    "category": "编程",
+    "tags": ["前端", "入门"]
+  },
+  {
+    "id": "note-js-dom",
+    "date": "2026-05",
+    "title": "JavaScript DOM 操作",
+    "summary": "用 JS 操控网页元素，实现动态交互效果",
+    "category": "编程",
+    "tags": ["前端", "JavaScript"]
+  },
+  {
+    "id": "note-python-auto",
+    "date": "2026-06",
+    "title": "Python 自动化脚本",
+    "summary": "用 Python 处理文件、爬取数据、自动化日常任务",
+    "category": "编程",
+    "tags": ["Python", "自动化"]
+  },
+  {
+    "id": "note-git",
+    "date": "2026-05",
+    "title": "Git 版本控制",
+    "summary": "代码版本管理基础，学会协作与回溯",
+    "category": "编程",
+    "tags": ["工具", "协作"]
+  },
+  {
+    "id": "note-claude-code",
+    "date": "2026-06",
+    "title": "Claude Code 高效使用",
+    "summary": "AI 编程助手的进阶用法，提升开发效率",
+    "category": "编程",
+    "tags": ["AI", "工具"]
+  },
+  {
+    "id": "note-frm",
+    "date": "2026-04",
+    "title": "FRM 风险管理基础",
+    "summary": "金融风险管理核心框架，从风险类型到计量方法",
+    "category": "金融",
+    "tags": ["FRM", "基础"]
+  },
+  {
+    "id": "note-basel3",
+    "date": "2026-05",
+    "title": "Basel III 市场风险",
+    "summary": "巴塞尔协议III下的市场风险资本计量框架",
+    "category": "金融",
+    "tags": ["Basel", "监管"]
+  },
+  {
+    "id": "note-portfolio-theory",
+    "date": "2026-05",
+    "title": "投资组合理论",
+    "summary": "马科维茨均值-方差模型与现代投资组合构建",
+    "category": "金融",
+    "tags": ["投资", "理论"]
+  },
+  {
+    "id": "note-options",
+    "date": "2026-06",
+    "title": "期权定价模型",
+    "summary": "Black-Scholes 模型与期权定价基本原理",
+    "category": "金融",
+    "tags": ["衍生品", "定价"]
+  },
+  {
+    "id": "note-finance-basics",
+    "date": "2026-04",
+    "title": "金融市场基础概念",
+    "summary": "货币市场、资本市场、一级二级市场等核心概念梳理",
+    "category": "金融",
+    "tags": ["基础", "市场"]
+  }
+]

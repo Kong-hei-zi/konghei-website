@@ -9,6 +9,7 @@ PORT = 8765
 ROOT = os.path.dirname(os.path.abspath(__file__))
 POSTS_DIR = os.path.join(ROOT, 'posts')
 PROJECTS_DIR = os.path.join(ROOT, 'projects')
+NOTES_DIR = os.path.join(ROOT, 'notes')
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
@@ -28,6 +29,14 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             length = int(self.headers.get('Content-Length', 0))
             data = json.loads(self.rfile.read(length))
             result = self._write_portfolio(data)
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.end_headers()
+            self.wfile.write(json.dumps(result, ensure_ascii=False).encode('utf-8'))
+        elif self.path == '/notes-publish':
+            length = int(self.headers.get('Content-Length', 0))
+            data = json.loads(self.rfile.read(length))
+            result = self._write_notes(data)
             self.send_response(200)
             self.send_header('Content-Type', 'application/json; charset=utf-8')
             self.end_headers()
@@ -137,6 +146,34 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             json.dump(index, f, ensure_ascii=False, indent=2)
         print(f'[Portfolio] Updated index.json with {len(projects)} projects')
         return {'ok': True, 'count': len(projects), 'images_saved': saved_images}
+
+    def _write_notes(self, data):
+        notes = data.get('notes', [])
+        os.makedirs(NOTES_DIR, exist_ok=True)
+        keep_ids = {n['id'] for n in notes}
+        for fname in os.listdir(NOTES_DIR):
+            if fname.endswith('.md') and fname[:-3] not in keep_ids:
+                os.remove(os.path.join(NOTES_DIR, fname))
+                print(f'[Notes] Removed {fname}')
+        for n in notes:
+            fpath = os.path.join(NOTES_DIR, n['id'] + '.md')
+            with open(fpath, 'w', encoding='utf-8') as f:
+                f.write(n.get('body', ''))
+            print(f'[Notes] Wrote {n["id"]}.md')
+        index = []
+        for n in notes:
+            index.append({
+                'id': n.get('id', ''),
+                'date': n.get('date', ''),
+                'title': n.get('title', ''),
+                'summary': n.get('summary', ''),
+                'category': n.get('category', ''),
+                'tags': n.get('tags', [])
+            })
+        with open(os.path.join(NOTES_DIR, 'index.json'), 'w', encoding='utf-8') as f:
+            json.dump(index, f, ensure_ascii=False, indent=2)
+        print(f'[Notes] Updated index.json with {len(notes)} notes')
+        return {'ok': True, 'count': len(notes)}
 
 
 print(f'Server: http://localhost:{PORT}')
