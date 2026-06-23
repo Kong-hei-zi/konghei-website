@@ -96,10 +96,15 @@
   function buildShelves() {
     shelvesEl.innerHTML = '';
     var g = getBooksByCategory();
-    catsEl.innerHTML = '<span class="bs-cat active" data-cat="ALL">ALL</span>';
+    var spAll = document.createElement('span'); spAll.className = 'bs-cat';
+    spAll.setAttribute('data-cat', 'ALL'); spAll.textContent = 'ALL';
+    if (currentCat === 'ALL') spAll.classList.add('active');
+    spAll.onclick = function () { filterCat('ALL'); };
+    catsEl.innerHTML = ''; catsEl.appendChild(spAll);
     g.order.forEach(function (cat) {
       var sp = document.createElement('span'); sp.className = 'bs-cat';
       sp.setAttribute('data-cat', cat); sp.textContent = cat;
+      if (currentCat === cat) sp.classList.add('active');
       sp.onclick = function () { filterCat(cat); };
       catsEl.appendChild(sp);
     });
