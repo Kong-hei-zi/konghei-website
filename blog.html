@@ -215,7 +215,8 @@
       function newId() { return 'user-' + Date.now(); }
       function formatDate() {
         var d = new Date();
-        return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')
+          +' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');
       }
 
       /* 线上网站禁止编辑——只有 localhost 能解锁 */
