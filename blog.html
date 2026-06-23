@@ -219,13 +219,8 @@
           +' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+':'+String(d.getSeconds()).padStart(2,'0');
       }
 
-      /* 线上网站禁止编辑——只有 localhost 能解锁 */
-      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        /* 线上：隐藏锁和+号，只读模式 */  }
-      else { initEditor(); }
-
-      function initEditor() {
-      var isAuthed = !!sessionStorage.getItem(AUTH_KEY);
+      var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      var isAuthed = isLocal && !!sessionStorage.getItem(AUTH_KEY);
       var fab = document.getElementById('fab-add');
       var fabExport = document.getElementById('fab-export');
       var unlockBtn = document.getElementById('unlock-btn');
@@ -423,7 +418,6 @@
       });
 
       render();
-    } /* end initEditor */
     })();
   </script>
 </body>
