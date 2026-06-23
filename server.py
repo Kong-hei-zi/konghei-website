@@ -149,12 +149,16 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 
     def _write_notes(self, data):
         notes = data.get('notes', [])
+        del_ids = set(data.get('deleted', []))
         os.makedirs(NOTES_DIR, exist_ok=True)
         keep_ids = {n['id'] for n in notes}
         for fname in os.listdir(NOTES_DIR):
-            if fname.endswith('.md') and fname[:-3] not in keep_ids:
+            nid = fname[:-3] if fname.endswith('.md') else None
+            if nid and (nid in del_ids or (nid not in keep_ids)):
                 os.remove(os.path.join(NOTES_DIR, fname))
                 print(f'[Notes] Removed {fname}')
+        # Also remove deleted entries from index
+        notes = [n for n in notes if n['id'] not in del_ids]
         for n in notes:
             fpath = os.path.join(NOTES_DIR, n['id'] + '.md')
             with open(fpath, 'w', encoding='utf-8') as f:

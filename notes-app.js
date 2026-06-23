@@ -2,8 +2,12 @@
   var isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   var AUTH_KEY = 'konghei_notes_auth';
   var DRAFT_KEY = 'konghei_notes_draft';
+  var DEL_KEY = 'konghei_notes_del';
   var PWD = 'konghei2026';
   var authed = sessionStorage.getItem(AUTH_KEY) === '1';
+  var deleted = [];
+  var delMode = false;
+  var btnDelMode = document.getElementById('bs-btn-del-mode');
   var shelvesEl = document.getElementById('bs-shelves');
   var emptyEl = document.getElementById('notes-empty');
   var searchInput = document.getElementById('notes-search');
@@ -61,6 +65,20 @@
   }
   function loadDrafts() { try { drafts = JSON.parse(localStorage.getItem(DRAFT_KEY) || '[]'); } catch (e) { drafts = []; } }
   function saveDrafts() { localStorage.setItem(DRAFT_KEY, JSON.stringify(drafts)); }
+  function loadDeleted() { try { deleted = JSON.parse(localStorage.getItem(DEL_KEY) || '[]'); } catch (e) { deleted = []; } }
+  function saveDeleted() { localStorage.setItem(DEL_KEY, JSON.stringify(deleted)); }
+
+  function deleteNote(note) {
+    if (!confirm('确定要删除「' + note.title + '」吗？')) return;
+    if (note._draft) {
+      drafts = drafts.filter(function (d) { return d.id !== note.id; });
+      saveDrafts();
+    } else {
+      if (deleted.indexOf(note.id) === -1) deleted.push(note.id);
+      saveDeleted();
+    }
+    buildShelves();
+  }
   function getBooksByCategory() {
     var map = {}, order = [];
     notes.forEach(function (n) {
@@ -123,6 +141,14 @@
     if (n._draft) { var bdg = document.createElement('span'); bdg.className = 'bs-book-badge'; bdg.textContent = 'D'; spine.appendChild(bdg); }
     book.appendChild(spine);
     book.onclick = function () { openDetail(n); };
+    if (isLocal) {
+      var delBtn = document.createElement('span');
+      delBtn.className = 'bs-book-del';
+      delBtn.textContent = '✕';
+      delBtn.onclick = function (e) { e.stopPropagation(); deleteNote(n); };
+      book.appendChild(delBtn);
+      if (delMode) delBtn.classList.add('show');
+    }
     return book;
   }
   function filterCat(cat) {
@@ -218,19 +244,32 @@
       payload.push({ id: n.id, title: n.title || '', date: n.date || '', summary: n.summary || '', category: n.category || '其他', tags: parseTags(n.tags), body: n.body || '' });
     }
     notes.forEach(add); drafts.forEach(add);
-    fetch('/notes-publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ notes: payload }) })
+    fetch('/notes-publish', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ notes: payload, deleted: deleted }) })
       .then(function (r) { return r.json(); })
-      .then(function () { setStatus('发布成功！', 'ok'); drafts = []; saveDrafts(); loadNotes(); })
+      .then(function () { setStatus('发布成功！', 'ok'); deleted = []; saveDeleted(); drafts = []; saveDrafts(); loadNotes(); })
       .catch(function () { setStatus('发布失败', 'err'); });
   };
   function loadNotes() {
+    loadDeleted();
     fetch('notes/index.json')
       .then(function (r) { return r.json(); })
-      .then(function (data) { notes = data || []; loadDrafts(); buildShelves(); })
+      .then(function (data) {
+        notes = (data || []).filter(function (n) { return deleted.indexOf(n.id) === -1; });
+        loadDrafts(); buildShelves();
+      })
       .catch(function () { notes = []; loadDrafts(); buildShelves(); });
   }
   if (isLocal) {
     btnAdd.style.display = 'inline-block';
+    btnDelMode.style.display = 'inline-block';
+    btnDelMode.title = '删除模式';
+    btnDelMode.onclick = function () {
+      delMode = !delMode;
+      btnDelMode.classList.toggle('active', delMode);
+      document.querySelectorAll('.bs-book-del').forEach(function (b) {
+        b.classList.toggle('show', delMode);
+      });
+    };
     if (authed) { loadDrafts(); }
     btnAdd.onclick = function () { ensureAuth(function () { openEditor(null); }); };
   }

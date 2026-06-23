@@ -939,6 +939,23 @@ body {
   content: ""; position: absolute; inset: 0;
   background: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,0.08) 4px, rgba(0,0,0,0.08) 8px);
 }
+.bs-book-del {
+  position: absolute; top: -6px; right: -6px; z-index: 6;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(248,113,113,0.85); color: #fff;
+  font-size: 0.6rem; display: none; align-items: center; justify-content: center;
+  cursor: pointer; line-height: 1; transition: all 0.2s ease;
+}
+.bs-book-del.show { display: flex; }
+.bs-book-del:hover { background: #f87171; transform: scale(1.15); }
+
+.bs-btn-del-mode {
+  padding: 6px 10px; border-radius: 14px; font-size: 0.82rem; cursor: pointer;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  color: var(--text-dim); transition: all 0.25s ease;
+}
+.bs-btn-del-mode:hover { border-color: rgba(248,113,113,0.4); color: #f87171; }
+.bs-btn-del-mode.active { background: rgba(248,113,113,0.15); border-color: #f87171; color: #f87171; }
 
 /* 编辑器弹窗 */
 .bs-editor-overlay {
