@@ -311,8 +311,7 @@
         var tl = h('div',{className:'timeline'});
 
         allPosts.forEach(function(p) {
-          var isUser = p.id && p.id.startsWith('user-');
-          var cls = 'tl-item card-clickable' + (isUser ? ' user-post' : '');
+          var cls = 'tl-item card-clickable' + (isAuthed ? ' user-post' : '');
 
           var card = h('div',{className:'tl-card card'},[
             h('span',{className:'card-date'},p.date),
@@ -321,7 +320,7 @@
             h('span',{className:'card-tag'},p.tag)
           ]);
 
-          if (isUser && isAuthed) {
+          if (isAuthed) {
             var actions = h('div',{className:'post-actions'},[
               h('button',{className:'btn-edit-post',title:'编辑'},'✎'),
               h('button',{className:'btn-del-post',title:'删除'},'✕')
