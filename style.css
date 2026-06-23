@@ -470,19 +470,7 @@ body {
   box-shadow: 0 0 12px var(--neon-purple-soft);
 }
 
-/* 作品集：展示柜 */
-.showcase-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.showcase-card {
-  display: flex; flex-direction: column; align-items: center; text-align: center;
-  padding: 32px 20px 24px; cursor: pointer;
-}
-.showcase-preview { font-size: 3.5rem; margin-bottom: 16px; transition: transform 0.3s ease; }
-.showcase-card:hover .showcase-preview { transform: scale(1.15); }
-.showcase-info h3 { margin-bottom: 6px; }
-.showcase-info p { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 10px; }
-.showcase-card:hover {
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 50px var(--neon-pink-soft);
-}
+/* 作品集样式已内联至 portfolio.html */
 
 /* 小店 */
 .card-list { display: flex; flex-direction: column; gap: 16px; }
@@ -639,17 +627,7 @@ body {
   animation-duration: 0.5s;
 }
 
-/* 展示柜卡片：弹入 */
-.showcase-card.anim-in {
-  animation-name: animPopIn;
-  animation-duration: 0.5s;
-}
-
-@keyframes animPopIn {
-  from { opacity: 0; transform: scale(0.85); }
-  60% { transform: scale(1.03); }
-  to   { opacity: 1; transform: scale(1); }
-}
+/* 作品集动画已内联至 portfolio.html */
 
 /* 文件夹：上滑 */
 .kb-folder.anim-in {
