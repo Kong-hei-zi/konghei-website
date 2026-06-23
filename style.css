@@ -106,8 +106,8 @@ body {
   height: var(--topbar-h);
   display: flex; align-items: center;
   padding: 0 40px;
-  background: linear-gradient(180deg, rgba(6,6,14,0.95) 60%, rgba(6,6,14,0) 100%);
-  backdrop-filter: blur(10px);
+  background: rgba(10,8,22,0.65);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 
 .tb-logo {
@@ -430,14 +430,14 @@ body {
 
 /* 卡片 */
 .card {
-  background: var(--surface); border: 1px solid var(--border);
+  background: rgba(15,13,30,0.5); border: 1px solid rgba(255,255,255,0.07);
   border-radius: var(--radius); padding: 22px 26px;
   transition: all 0.3s ease; position: relative;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
 }
 .card:hover {
   border-color: rgba(167,139,250,0.35); transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.4), 0 0 40px var(--neon-purple-soft);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 50px rgba(167,139,250,0.08);
 }
 .card-date { font-size: 0.8rem; color: var(--text-dim); display: block; margin-bottom: 8px; }
 .card h3 { font-size: 1.1rem; margin-bottom: 8px; font-weight: 600; }
